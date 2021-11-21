@@ -1,8 +1,9 @@
 import sys
 from rembg.bg import remove
-
 from PIL import ImageFile
+
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+
 
 def _save_file(data, prop, prop_value):
     f = open(f"{prop}_{prop_value}.jpeg", "wb+")

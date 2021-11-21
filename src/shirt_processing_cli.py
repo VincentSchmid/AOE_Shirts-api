@@ -2,6 +2,7 @@ import typer
 from _rembg_helper import remove_bg_shirts
 import _fileio
 
+
 app = typer.Typer()
 
 def remove_background_pipeline(path, new_path, dry_run):
