@@ -4,7 +4,7 @@ import _fileio
 
 app = typer.Typer()
 
-def remove_background_pipeline(path, new_path, detail, dry_run):
+def remove_background_pipeline(path, new_path, dry_run):
     if dry_run:
         typer.echo(f"{path} saving to {new_path}")
     else:
@@ -14,7 +14,7 @@ def remove_background_pipeline(path, new_path, detail, dry_run):
 
 
 @app.command()
-def remove_background(path: str, output: str, detail: bool = False, dry_run: bool = True):
+def remove_background(path: str, output: str, dry_run: bool = True):
     if _fileio.is_dir(path):
         if not _fileio.is_dir(output):
             typer.echo("output property needs to be a directory")
@@ -24,7 +24,7 @@ def remove_background(path: str, output: str, detail: bool = False, dry_run: boo
             for file in files:
                 new_path = _fileio.get_file_in_new_directory(file, output)
 
-                remove_background_pipeline(file, new_path, detail, dry_run)
+                remove_background_pipeline(file, new_path, dry_run)
 
     else:
         if _fileio.is_dir(output):
@@ -32,7 +32,7 @@ def remove_background(path: str, output: str, detail: bool = False, dry_run: boo
         else:
             new_path = output
         
-        remove_background_pipeline(path, new_path, detail, dry_run)
+        remove_background_pipeline(path, new_path, dry_run)
 
 
 if __name__ == "__main__":
