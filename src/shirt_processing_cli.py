@@ -7,6 +7,35 @@ from pipelines import *
 app = typer.Typer()
 
 @app.command()
+def advanced_pipeline(path:str,
+                 output:str,
+                 remove_background:bool=False,
+                 crop_image:bool=False,
+                 resize_image:bool=False,
+                 resize_to:int=900):
+
+    if _fileio.is_dir(path):
+        if not _fileio.is_dir(output):
+            typer.echo("output property needs to be a directory")
+        else:
+            files = _fileio.get_files_in_folder(path)
+            
+            for file in files:
+                new_path = _fileio.replace_suffix(file, "png")
+                new_path = _fileio.get_file_in_new_directory(new_path, output)
+
+                typer.echo(f"{file} saving to {new_path}")
+                parameterized_pipeline(file, new_path, remove_background, crop_image, resize_image, resize_to)
+
+    else:
+        if _fileio.is_dir(output):
+            new_path = _fileio.get_file_in_new_directory(path, output)
+        else:
+            new_path = output
+        
+        parameterized_pipeline(path, new_path, remove_background, crop_image, resize_image, resize_to)
+
+@app.command()
 def remove_background(path: str, output: str, dry_run: bool = True):
     if _fileio.is_dir(path):
         if not _fileio.is_dir(output):

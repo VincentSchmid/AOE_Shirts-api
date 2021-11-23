@@ -21,7 +21,7 @@ def remove_bg(data, amft, ambt, amess):
         alpha_matting_base_size=2000)
 
 def remove_bg_shirts(data):
-    return remove_bg(data, amft = 100, ambt = 105, amess = 0)
+    return remove_bg(data, amft = 100, ambt = 175, amess = 0)
 
 def test_property(data, amft, ambt, amess, property_name, no_repetitions, increase):
     def incr(amft, ambt, amess, property_name, amount):

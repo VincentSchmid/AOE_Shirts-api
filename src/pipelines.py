@@ -35,3 +35,21 @@ def full_shirt_pipeline(path_background: str, path_shirt: str, resize_to: int, o
     frgrnd = _image_processing.resize_image(frgrnd, resize_to)
     result = _image_processing.add_image_centered(bckgrnd, frgrnd)
     _image_processing.save_img(result, output)
+
+def parameterized_pipeline(path_to_image:str,
+                 output_path:str,
+                 remove_bg:bool,
+                 crop_image:bool,
+                 resize_image:bool,
+                 resize_to:bool):
+
+    img = _image_processing.open_image(path_to_image)
+
+    if remove_bg:
+        img = remove_bg_shirts(img)
+    if crop_image:
+        img = _image_processing.auto_crop_image(img)
+    if resize_image:
+        img = _image_processing.resize_image(img, resize_to)
+    
+    _image_processing.save_img(img, output_path)
