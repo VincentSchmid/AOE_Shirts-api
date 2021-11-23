@@ -1,5 +1,5 @@
 import typer
-from _rembg_helper import remove_bg_shirts
+from _remove_background import remove_bg_shirts
 import _fileio
 from pipelines import *
 
@@ -98,6 +98,7 @@ def full_pipeline(path_to_background: str, path_to_foreground: str, output: str,
         else:
             new_path = output
 
+        new_path = _fileio.replace_suffix(new_path, "png")
         full_shirt_pipeline(path_to_background, path_to_foreground, resize_to, new_path)
 
 if __name__ == "__main__":
