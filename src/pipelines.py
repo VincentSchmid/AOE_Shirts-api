@@ -5,9 +5,9 @@ import _image_processing
 
 
 def remove_background_pipeline(path, new_path):
-        file = _image_processing.open_image(path)
-        no_bg = _image_processing.remove_bg_shirts(file)
-        _image_processing.save_img(no_bg, new_path)
+    file = _image_processing.open_image(path)
+    no_bg = _image_processing.remove_bg_shirts(file)
+    _image_processing.save_img(no_bg, new_path)
 
 def crop_pipeline(path, new_path):
     img = _image_processing.open_image(path)
