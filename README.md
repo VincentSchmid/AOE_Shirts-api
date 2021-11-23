@@ -25,7 +25,7 @@ install dependencies using the provided requirements.txt
 For available parameter execute:
 
   ```sh
-  python shirt_processing_cli --help
+  python shirt_processing_cli.py --help
   ```
 
 The cli file does not add logic and is built on top of the libraries,  
