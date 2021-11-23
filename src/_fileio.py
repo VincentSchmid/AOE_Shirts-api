@@ -1,11 +1,16 @@
 from sys import argv
 from pathlib import Path
 import glob
-from numpy import fromfile
+from numpy import fromfile, asanyarray
+from PIL import Image
+import io
 
 
 def get_cwd():
     return str(Path.cwd().resolve())
+
+def get_Image(arr):
+    return Image.open(io.BytesIO(arr)).convert("RGBA")
 
 def get_files_in_folder(path: str, suffix= "**"):
     return glob.glob(path + f"/**.{suffix}")
@@ -23,6 +28,9 @@ def get_file_in_new_directory(current_path: str, new_folder: str):
 
 def is_dir(path: str):
     return Path(path).is_dir()
+
+def get_arr(img: Image):
+    return asanyarray(img)
 
 def save_file(data, path: str):
     f = open(path, "wb+")

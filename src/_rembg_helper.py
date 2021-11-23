@@ -3,6 +3,7 @@ from rembg.bg import remove
 from PIL import ImageFile
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
+print("Load Truncated images")
 
 
 def _save_file(data, prop, prop_value):
@@ -17,7 +18,7 @@ def remove_bg(data, amft, ambt, amess):
         alpha_matting_foreground_threshold=amft,
         alpha_matting_background_threshold=ambt,
         alpha_matting_erode_structure_size=amess,
-        alpha_matting_base_size=200)
+        alpha_matting_base_size=2000)
 
 def remove_bg_shirts(data):
     return remove_bg(data, amft = 100, ambt = 105, amess = 0)
