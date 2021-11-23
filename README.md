@@ -28,7 +28,8 @@ For available parameter execute:
   python shirt_processing_cli --help
   ```
 
-The cli is built on top, and the libraries can be used without the cli.  
+The cli file does not add logic and is built on top of the libraries,  
+meaning the libraries can be used on their own.  
   
 ## License
 
