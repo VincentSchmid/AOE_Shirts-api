@@ -9,8 +9,13 @@ import io
 def get_cwd():
     return str(Path.cwd().resolve())
 
-def get_Image(arr):
+def get_Image(arr) -> Image:
     return Image.open(io.BytesIO(arr)).convert("RGBA")
+
+def image_to_bytes(img:Image) -> bytes:
+    img_byte_arr = io.BytesIO()
+    img.save(img_byte_arr, format='PNG')
+    return img_byte_arr.getvalue()
 
 def get_files_in_folder(path: str, suffix= "**"):
     return glob.glob(path + f"/**.{suffix}")
