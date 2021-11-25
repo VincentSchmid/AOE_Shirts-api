@@ -45,7 +45,3 @@ def test_property(data, amft, ambt, amess, property_name, no_repetitions, increa
         no_bg = remove_bg(data, amft, ambt, amess)
         _save_file(no_bg, property_name, property_value)
         amft, ambt, amess, property_value = incr(amft, ambt, amess, property_name, increase)
-
-# data = sys.stdin.buffer.read()
-
-# test_property(data, 1000, 0, 100, "amft", 8, 500)

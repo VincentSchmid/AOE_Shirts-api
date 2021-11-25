@@ -1,6 +1,5 @@
 from pymatting.util.util import save_image
 from _remove_background import remove_bg_shirts
-import _fileio
 import _image_processing
 from PIL import Image
 
