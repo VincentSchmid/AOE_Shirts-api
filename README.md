@@ -30,6 +30,17 @@ For available parameter execute:
 
 The cli file does not add logic and is built on top of the libraries,  
 meaning the libraries can be used on their own.  
+
+# Usage API
+
+To run the server execute:
+
+  ```sh
+  uvicorn shirt_processing_api:app --reload
+  ```
+
+API Documentation available at:
+`http://127.0.0.1:8000/docs`
   
 ## License
 
