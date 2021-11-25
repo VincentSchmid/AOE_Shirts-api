@@ -1,7 +1,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 Helper tool to post images of products on instagram or sites like eaby.  
-Contains a library and cli written in python that removes the background of passed images.  
+Contains a library, cli and api written in python that removes the background of passed images.  
 Background can be set.  
 
 <!-- GETTING STARTED -->
@@ -20,7 +20,7 @@ install dependencies using the provided requirements.txt
 
 
 <!-- USAGE EXAMPLES -->
-## Usage
+## Usage CLI
 
 For available parameter execute:
 
