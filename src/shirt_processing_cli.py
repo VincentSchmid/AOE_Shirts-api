@@ -25,7 +25,8 @@ def advanced_pipeline(path:str,
                 new_path = _fileio.get_file_in_new_directory(new_path, output)
 
                 typer.echo(f"{file} saving to {new_path}")
-                parameterized_pipeline(file, new_path, remove_background, crop_image, resize_image, resize_to)
+                new_img = parameterized_pipeline(_image_processing.open_image(file), remove_background, crop_image, resize_image, resize_to)
+                _image_processing.save_img(new_img, new_path)
 
     else:
         if _fileio.is_dir(output):
@@ -33,7 +34,8 @@ def advanced_pipeline(path:str,
         else:
             new_path = output
         
-        parameterized_pipeline(path, new_path, remove_background, crop_image, resize_image, resize_to)
+        new_img = parameterized_pipeline(_image_processing.open_image(path), remove_background, crop_image, resize_image, resize_to)
+        _image_processing.save_img(new_img, new_path)
 
 @app.command()
 def remove_background(path: str, output: str, dry_run: bool = True):
@@ -49,7 +51,8 @@ def remove_background(path: str, output: str, dry_run: bool = True):
 
                 typer.echo(f"{file} saving to {new_path}")
                 if not dry_run:
-                    remove_background_pipeline(file, new_path)
+                    new_img = parameterized_pipeline(_image_processing.open_image(file))
+                    _image_processing.save_img(new_img, new_path)
 
     else:
         if _fileio.is_dir(output):
@@ -57,7 +60,8 @@ def remove_background(path: str, output: str, dry_run: bool = True):
         else:
             new_path = output
         
-        remove_background_pipeline(path, new_path)
+        new_img = parameterized_pipeline(_image_processing.open_image(path))
+        _image_processing.save_img(new_img, new_path)
 
 @app.command()
 def crop_images(path: str, output: str, resize: bool = False, resize_to: int = 800, dry_run: bool = True):
@@ -71,10 +75,9 @@ def crop_images(path: str, output: str, resize: bool = False, resize_to: int = 8
                 new_path = _fileio.replace_suffix(file, "png")
                 new_path = _fileio.get_file_in_new_directory(new_path, output)
 
-                if resize:
-                    crop_shirt_pipeline(file, new_path, resize_to)
-                else:
-                    crop_pipeline(file, new_path)
+                new_img = parameterized_pipeline(_image_processing.open_image(file), False, True, resize, resize_to)
+                _image_processing.save_img(new_img, new_path)
+
 
     else:
         if _fileio.is_dir(output):
@@ -85,7 +88,8 @@ def crop_images(path: str, output: str, resize: bool = False, resize_to: int = 8
         typer.echo(f"{path} saving to {new_path}")
 
         if not dry_run:
-            remove_background_pipeline(path, new_path)
+            new_img = parameterized_pipeline(_image_processing.open_image(path), False, True, resize, resize_to)
+            _image_processing.save_img(new_img, new_path)
 
 @app.command()
 def merge_background(path_to_background: str, path_to_foreground: str, output: str):
@@ -98,7 +102,9 @@ def merge_background(path_to_background: str, path_to_foreground: str, output: s
             for file in files:
                 new_path = _fileio.replace_suffix(file, "png")
                 new_path = _fileio.get_file_in_new_directory(new_path, output)
-                merge_layers_pipeline(path_to_background, file, new_path)
+                new_img = merge_layers_pipeline(_image_processing.open_image(path_to_background),
+                    _image_processing.open_image(file))
+                _image_processing.save_img(new_img, new_path)
     
     else:
         if _fileio.is_dir(output):
@@ -106,7 +112,9 @@ def merge_background(path_to_background: str, path_to_foreground: str, output: s
         else:
             new_path = output
 
-            merge_layers_pipeline(path_to_background, path_to_foreground, new_path)
+            new_img = merge_layers_pipeline(_image_processing.open_image(path_to_background), 
+                _image_processing.open_image(path_to_foreground))
+            _image_processing.save_img(new_img, new_path)
 
 @app.command()
 def full_pipeline(path_to_background: str, path_to_foreground: str, output: str, resize_to: int = 900):
@@ -119,7 +127,10 @@ def full_pipeline(path_to_background: str, path_to_foreground: str, output: str,
             for file in files:
                 new_path = _fileio.replace_suffix(file, "png")
                 new_path = _fileio.get_file_in_new_directory(new_path, output)
-                full_shirt_pipeline(path_to_background, file, resize_to, new_path)
+
+                new_img = full_shirt_pipeline(_image_processing.open_image(path_to_background), 
+                    _image_processing.open_image(file), resize_to)
+                _image_processing.save_img(new_img, new_path)
     
     else:
         if _fileio.is_dir(output):
@@ -128,7 +139,9 @@ def full_pipeline(path_to_background: str, path_to_foreground: str, output: str,
             new_path = output
 
         new_path = _fileio.replace_suffix(new_path, "png")
-        full_shirt_pipeline(path_to_background, path_to_foreground, resize_to, new_path)
+        new_img = full_shirt_pipeline(_image_processing.open_image(path_to_background), 
+            _image_processing.open_image(path_to_foreground), resize_to)
+        _image_processing.save_img(new_img, new_path)
 
 if __name__ == "__main__":
     app()
