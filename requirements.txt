@@ -1,4 +1,4 @@
-torch==1.7.1
+torch
 torchvision
 fastapi==0.70.0
 uvicorn==0.15.0
