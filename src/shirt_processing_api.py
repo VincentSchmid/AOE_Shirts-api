@@ -24,7 +24,7 @@ async def advanced_pipeline(file: bytes = File(...),
 @app.post("/merge_background/")
 async def merge_background(background: bytes=File(...), foreground: bytes=File(...)):
     img = merge_background(_fileio.get_Image(background), _fileio.get_Image(foreground))
-    return Response(content=_fileio.image_to_bytes(img), media_type="image/png")
+    return Response(content=img.tobytes(), media_type="image/png")
 
 @app.post("/full_pipeline/")
 async def full_pipeline(background: bytes=File(...), foreground: bytes=File(...), resize_to:int=900):
