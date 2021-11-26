@@ -19,8 +19,7 @@ async def advanced_pipeline(file: bytes = File(...),
         crop_image,
         resize_image,
         resize_to)
-    print(type(img))
-    return Response(content=_fileio.image_to_bytes(img), media_type="image/png")
+    return Response(content=img.tobytes(), media_type="image/png")
 
 @app.post("/merge_background/")
 async def merge_background(background: bytes=File(...), foreground: bytes=File(...)):
@@ -32,4 +31,4 @@ async def full_pipeline(background: bytes=File(...), foreground: bytes=File(...)
     img = full_shirt_pipeline(_fileio.get_Image(background),
         _fileio.get_Image(foreground),
         resize_to)
-    return Response(content=_fileio.image_to_bytes(img), media_type="image/png")
+    return Response(content=img.tobytes(), media_type="image/png")
