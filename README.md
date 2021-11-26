@@ -31,7 +31,7 @@ For available parameter execute:
 The cli file does not add logic and is built on top of the libraries,  
 meaning the libraries can be used on their own.  
 
-# Usage API
+## Usage API
 
 To run the server execute:
 
