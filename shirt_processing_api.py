@@ -1,8 +1,7 @@
 from fastapi import FastAPI, File
 from fastapi.responses import Response
-import _fileio
-from pipelines import full_shirt_pipeline, parameterized_pipeline
-from shirt_processing_cli import remove_background
+from src._fileio import *
+from src.pipelines import full_shirt_pipeline, parameterized_pipeline
 from PIL import Image
 
 
@@ -23,12 +22,12 @@ async def advanced_pipeline(file: bytes = File(...),
 
 @app.post("/merge_background/")
 async def merge_background(background: bytes=File(...), foreground: bytes=File(...)):
-    img = merge_background(_fileio.get_Image(background), _fileio.get_Image(foreground))
+    img = merge_background(get_Image(background), get_Image(foreground))
     return Response(content=img.tobytes(), media_type="image/png")
 
 @app.post("/full_pipeline/")
 async def full_pipeline(background: bytes=File(...), foreground: bytes=File(...), resize_to:int=900):
-    img = full_shirt_pipeline(_fileio.get_Image(background),
-        _fileio.get_Image(foreground),
+    img = full_shirt_pipeline(get_Image(background),
+        get_Image(foreground),
         resize_to)
     return Response(content=img.tobytes(), media_type="image/png")
