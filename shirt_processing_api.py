@@ -9,7 +9,7 @@ app = FastAPI()
 
 @app.post("/advanced_pipeline/")
 async def advanced_pipeline(file: bytes = File(...), 
-    remove_bg:bool=True,
+    remove_background:bool=True,
     crop_image:bool=False,
     resize_image:bool=False,
     resize_to:int=900):
