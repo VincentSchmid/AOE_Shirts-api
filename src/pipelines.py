@@ -6,14 +6,14 @@ from PIL import Image
 def parameterized_pipeline(img:Image,
                  remove_bg:bool=True,
                  crop_image:bool=False,
-                 resize_image:bool=False,
+                 bresize_image:bool=False,
                  resize_to:int=900) -> Image:
 
     if remove_bg:
         img = remove_bg_shirts(img)
     if crop_image:
         img = auto_crop_image(img)
-    if resize_image:
+    if bresize_image:
         img = resize_image(img, resize_to)
     
     return img

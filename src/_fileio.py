@@ -15,6 +15,7 @@ def get_Image(arr) -> Image:
 def image_to_bytes(img:Image) -> bytes:
     img_byte_arr = io.BytesIO()
     img.save(img_byte_arr, format='PNG')
+    img_byte_arr.seek(0)
     return img_byte_arr.getvalue()
 
 def get_files_in_folder(path: str, suffix= "**"):
