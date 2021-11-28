@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File
 from fastapi.responses import Response
 from src._fileio import *
-from src.pipelines import full_shirt_pipeline, parameterized_pipeline
+from src.pipelines import full_shirt_pipeline, parameterized_pipeline, merge_layers_pipeline
 from PIL import Image
 
 
@@ -22,7 +22,7 @@ async def advanced_pipeline(file: bytes = File(...),
 
 @app.post("/merge_background/")
 async def merge_background(background: bytes=File(...), foreground: bytes=File(...)):
-    img = merge_background(get_Image(background), get_Image(foreground))
+    img = merge_layers_pipeline(get_Image(background), get_Image(foreground))
     return Response(content=image_to_bytes(img), media_type="image/png")
 
 @app.post("/full_pipeline/")
