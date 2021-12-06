@@ -5,17 +5,16 @@ from enum import Enum
 from flask import Flask, request
 from werkzeug.wrappers import Response
 
+from Model import AppModel
+from State.Idle import Idle
+from State.RecievingShirts import RecievingShirts
+from State.SettingBackground import SettingBackground
+
 from telegram import Bot, Update, ForceReply
 from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler, CallbackContext
 
 ## LORD FORGIVE ME FOR THIS GOD AWFUL HACK JOB
 app = Flask(__name__)
-
-class State(Enum):
-    IDLE = 0,
-    SETTING_BACKGROUND = 1,
-    RECIEVING_SHIRTS = 2,
-    RETURNING_RESULT = 3
 
 def start(update: Update, context: CallbackContext) -> None:
     global state
@@ -33,11 +32,10 @@ def echo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(update.message.text)
 
 
-
-shirts = []
-background = ""
-state = State.IDLE
 bot = Bot(token=os.environ["TOKEN"])
+model = AppModel()
+state = Idle(bot, model)
+
 
 dispatcher = Dispatcher(bot=bot, update_queue=None)
 
@@ -47,9 +45,6 @@ dispatcher.add_handler(CommandHandler("help", help_command))
 
 # on non command i.e message - echo the message on Telegram
 dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-
-
-
 
 def document_received(update: Update, context: CallbackContext) -> None:
     global state
@@ -70,7 +65,7 @@ def document_received(update: Update, context: CallbackContext) -> None:
         state == State.RETURNING_RESULT
 
     if state == State.RETURNING_RESULT:
-        
+        pass
 
 dispatcher.add_handler(MessageHandler(Filters.video | Filters.photo | Filters.document, 
                          document_received))
