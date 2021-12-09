@@ -5,6 +5,7 @@ from Model import AppModel
 class State(ABC):
     def __init__(self, appModel: AppModel):
         self.model = appModel
+        self.stateInit()
 
     @abstractmethod
     def document_received(self, document):
@@ -15,11 +16,11 @@ class State(ABC):
         pass
 
     @abstractmethod
-    def done_handler(self):
+    def start_handler(self):
         pass
 
     @abstractmethod
-    def start_handler(self):
+    def done_handler(self):
         pass
 
     def send_message(self, text):

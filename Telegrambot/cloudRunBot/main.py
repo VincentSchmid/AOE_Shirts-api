@@ -6,69 +6,27 @@ from flask import Flask, request
 from werkzeug.wrappers import Response
 
 from Model import AppModel
-from State.Idle import Idle
-from State.RecievingShirts import RecievingShirts
-from State.SettingBackground import SettingBackground
+from Instance import Instance
 
-from telegram import Bot, Update, ForceReply
-from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler, CallbackContext
+from telegram import Bot, Update
+from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler
+
 
 ## LORD FORGIVE ME FOR THIS GOD AWFUL HACK JOB
 app = Flask(__name__)
 
-def start(update: Update, context: CallbackContext) -> None:
-    global state
-    state = State.SETTING_BACKGROUND
-    
-    bot.send_message(chat_id=update.message.chat_id, 
-                    text="Send Background Image")
-
-
-def help_command(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
-
-def echo(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text(update.message.text)
-
-
 bot = Bot(token=os.environ["TOKEN"])
-model = AppModel()
-state = Idle(bot, model)
+model = AppModel(bot)
+instance = Instance(model)
 
 
 dispatcher = Dispatcher(bot=bot, update_queue=None)
 
-# on different commands - answer in Telegram
-dispatcher.add_handler(CommandHandler("start", start))
-dispatcher.add_handler(CommandHandler("help", help_command))
-
-# on non command i.e message - echo the message on Telegram
-dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-
-def document_received(update: Update, context: CallbackContext) -> None:
-    global state
-    global background
-    global shirts
-    global bot
-    if state == State.SETTING_BACKGROUND:
-        background = update.message
-        state == State.RECIEVING_SHIRTS
-        bot.send_message(chat_id=update.message.chat_id,
-                         text="Background Set")
-
-        bot.send_message(chat_id=update.message.chat_id,
-                         text="Send unedited shirt photos")
-
-    if state == State.RECIEVING_SHIRTS:
-        shirts.append(update.message)
-        state == State.RETURNING_RESULT
-
-    if state == State.RETURNING_RESULT:
-        pass
+dispatcher.add_handler(CommandHandler("start", instance.state.start_handler))
+dispatcher.add_handler(CommandHandler("done", instance.state.done_handler))
 
 dispatcher.add_handler(MessageHandler(Filters.video | Filters.photo | Filters.document, 
-                         document_received))
+                         instance.state.document_received))
 
 @app.post("/")
 def index() -> Response:
