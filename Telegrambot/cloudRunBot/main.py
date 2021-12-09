@@ -26,7 +26,7 @@ dispatcher.add_handler(CommandHandler("start", lambda: instance.state.start_hand
 dispatcher.add_handler(CommandHandler("done", lambda: instance.state.done_handler() ))
 
 dispatcher.add_handler(MessageHandler(Filters.video | Filters.photo | Filters.document, 
-                         instance.state.document_received))
+                        lambda: instance.state.document_received() ))
 
 @app.post("/")
 def index() -> Response:
