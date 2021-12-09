@@ -8,4 +8,4 @@ class SettingBackground(State):
 
     def stateInit(self):
         self.send_message("Send Background Image")
-    
+        

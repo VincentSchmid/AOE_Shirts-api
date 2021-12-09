@@ -10,4 +10,4 @@ class RecievingShirts(State):
 
     def done_handler(self):
         self.model.events.shirts_received()
-    
+        
