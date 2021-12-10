@@ -13,8 +13,8 @@ from pathlib import Path
 class Instance():
     def __init__(self, model) -> None:
         self.model: AppModel = model
-        self.state: State = Idle(self.model)
-        self.messager: Messager = Messager(self.model)
+        self._state: State = Idle(self.model)
+        self._messager: Messager = Messager(self.model)
 
         self.model.events.started += self.on_started
         self.model.events.background_set += self.on_background_set
@@ -23,24 +23,24 @@ class Instance():
     
     def on_start_command(self, update: Update, context: CallbackContext):
         self.model.update = update
-        self.state.start_handler()
+        self._state.start_handler()
 
     def on_done_command(self, update: Update, context: CallbackContext):
         self.model.update = update
-        self.state.done_handler()
+        self._state.done_handler()
 
     def on_document_received(self, update: Update, context: CallbackContext):
         self.model.update = update
-        self.state.document_received()
+        self._state.document_received()
 
     def on_started(self):
-        self.state = SettingBackground(self.model)
+        self._state = SettingBackground(self.model)
 
     def on_background_set(self):
-        self.state = RecievingShirts(self.model)
+        self._state = RecievingShirts(self.model)
 
     def on_shirts_received(self):
-        self.state = ReturningResult(self.model)
+        self._state = ReturningResult(self.model)
     
     def on_return_results(self):
         for shirt in self.model.shirts:
@@ -56,4 +56,4 @@ class Instance():
         foreground_data = foreground.download_as_bytearray()
 
         self.model.result = full_pipeline(background_filename, background_data, foreground_filename, foreground_data)
-        self.messager.send_file()
+        self._messager.send_file()
