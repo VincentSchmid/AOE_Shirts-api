@@ -12,7 +12,6 @@ from telegram import Bot, Update
 from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler
 
 
-## LORD FORGIVE ME FOR THIS GOD AWFUL HACK JOB
 app = Flask(__name__)
 
 bot = Bot(token=os.environ["TOKEN"])
