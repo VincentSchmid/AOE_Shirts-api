@@ -22,11 +22,11 @@ instance = Instance(model)
 
 dispatcher = Dispatcher(bot=bot, update_queue=None)
 
-dispatcher.add_handler(CommandHandler("start", lambda: instance.state.start_handler() ))
-dispatcher.add_handler(CommandHandler("done", lambda: instance.state.done_handler() ))
+dispatcher.add_handler(CommandHandler("start", instance.on_start_command))
+dispatcher.add_handler(CommandHandler("done", instance.on_done_command))
 
 dispatcher.add_handler(MessageHandler(Filters.video | Filters.photo | Filters.document, 
-                        lambda: instance.state.document_received() ))
+                        instance.on_document_received))
 
 @app.post("/")
 def index() -> Response:

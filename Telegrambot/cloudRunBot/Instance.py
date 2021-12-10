@@ -1,4 +1,6 @@
+from telegram import Update
 from telegram.files.file import File
+from telegram.ext import CallbackContext
 
 from Model import AppModel
 from State.State import State
@@ -18,7 +20,18 @@ class Instance():
         self.model.events.background_set += self.on_background_set
         self.model.evnets.shirts.shirts_received += self.on_shirts_received
         self.model.events.return_results += self.on_return_results
-        
+    
+    def on_start_command(self, update: Update, context: CallbackContext):
+        self.model.update = update
+        self.state.start_handler()
+
+    def on_done_command(self, update: Update, context: CallbackContext):
+        self.model.update = update
+        self.state.done_handler()
+
+    def on_document_received(self, update: Update, context: CallbackContext):
+        self.model.update = update
+        self.state.document_received()
 
     def on_started(self):
         self.state = SettingBackground(self.model)
