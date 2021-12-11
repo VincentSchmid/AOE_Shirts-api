@@ -2,11 +2,9 @@ import sys
 from rembg.bg import remove
 from PIL import ImageFile, Image
 from io import BytesIO
-from ._fileio import image_to_bytes
+
 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-print("Load Truncated images")
-
 
 def pipe_out_data(data):
     sys.stdout.buffer.write(data)

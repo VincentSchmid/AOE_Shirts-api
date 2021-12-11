@@ -1,4 +1,4 @@
-from PIL import Image, ImageChops
+from PIL import Image
 
 
 def open_image(path: str) -> Image:

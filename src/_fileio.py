@@ -1,7 +1,5 @@
-from sys import argv
 from pathlib import Path
 import glob
-from numpy import asanyarray
 from PIL import Image
 import io
 
