@@ -34,7 +34,7 @@ class Instance():
 
     def on_document_received(self, update: Update, context: CallbackContext):
         self.model.update = update
-        self._state.document_received()
+        self._state.document_received(update.message)
 
     def on_started(self):
         self._state = SettingBackground(self.model)

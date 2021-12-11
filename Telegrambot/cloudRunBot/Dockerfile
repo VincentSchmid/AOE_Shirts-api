@@ -1,5 +1,7 @@
 FROM python:3.8-slim
-ENV PYTHONUNBUFFERED True
+ENV PYTHONUNBUFFERED True \
+    SHIRT_POROCESSING_ADDRESS \
+    TOKEN
 WORKDIR /app
 COPY *.txt .
 RUN pip install --no-cache-dir --upgrade pip -r requirements.txt
