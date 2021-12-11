@@ -28,6 +28,6 @@ async def merge_background(background: bytes=File(...), foreground: bytes=File(.
 @app.post("/full_pipeline/")
 async def full_pipeline(background: bytes=File(...), foreground: bytes=File(...), resize_to:int=900):
     img = full_shirt_pipeline(get_Image(background),
-        get_Image(foreground),
+        foreground,
         resize_to)
     return Response(content=image_to_bytes(img), media_type="image/png")
