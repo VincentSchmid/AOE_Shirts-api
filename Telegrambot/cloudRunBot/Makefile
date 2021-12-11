@@ -9,8 +9,9 @@ include params.mk
 .DEFAULT_GOAL := help
 
 deploy-gcloud: ## Deploys code to gcloud and links telegram bot to deployed instance
-	gcloud beta run deploy bot --source . --set-env-vars TOKEN=$(TELEGRAM_TOKEN) --platform managed --allow-unauthenticated --project $(GCLOUD_PROJECT_ID)
-	curl "https://api.telegram.org/bot${TELEGRAM_TOKEN}/setWebhook?url=${gcloud run services describe bot --format 'value(status.url)' --project ${GCLOUD_PROJECT_ID}}"
+	gcloud beta run deploy bot --source . --set-env-vars TOKEN=$(TELEGRAM_TOKEN),SHIRT_POROCESSING_ADDRESS=${SHIRT_POROCESSING_ADDRESS} --platform managed --allow-unauthenticated --project $(GCLOUD_PROJECT_ID)
+	SERVICE_URL="$(shell gcloud run services describe bot --format 'value(status.url)' --project $(GCLOUD_PROJECT_ID))"; \
+	curl "https://api.telegram.org/bot${TELEGRAM_TOKEN}/setWebhook?url="$$SERVICE_URL
 
 run-container: ## Builds the container and runs it locally
 	docker build -t schmivin/$(CONTAINER_NAME) .
