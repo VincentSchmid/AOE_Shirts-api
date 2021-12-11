@@ -4,7 +4,10 @@ from telegram.ext import CallbackContext
 
 from Model import AppModel
 from State.State import State
-from .State import Idle, RecievingShirts, ReturningResult, SettingBackground
+from State.Idle import Idle
+from State.RecievingShirts import RecievingShirts
+from State.ReturningResult import ReturningResult
+from State.SettingBackground import SettingBackground
 from Messager import Messager
 from Shirt_Processing import full_pipeline
 from pathlib import Path
@@ -18,7 +21,7 @@ class Instance():
 
         self.model.events.started += self.on_started
         self.model.events.background_set += self.on_background_set
-        self.model.evnets.shirts.shirts_received += self.on_shirts_received
+        self.model.events.shirts_received += self.on_shirts_received
         self.model.events.return_results += self.on_return_results
     
     def on_start_command(self, update: Update, context: CallbackContext):

@@ -1,25 +1,20 @@
-from abc import ABC, abstractmethod
 from Model import AppModel
 
 
-class State(ABC):
+class State():
     def __init__(self, appModel: AppModel):
         self.model = appModel
         self.stateInit()
 
-    @abstractmethod
     def document_received(self, document):
         pass
 
-    @abstractmethod
     def stateInit(self):
         pass
 
-    @abstractmethod
     def start_handler(self):
         pass
 
-    @abstractmethod
     def done_handler(self):
         pass
 

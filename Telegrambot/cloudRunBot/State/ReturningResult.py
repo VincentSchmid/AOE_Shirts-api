@@ -1,7 +1,7 @@
-from State import State
+from .State import State
 
 
-class RecievingShirts(State):
+class ReturningResult(State):
     def stateInit(self):
         self.model.events.results.returned += self.done_handler
         self.model.events.return_results()
