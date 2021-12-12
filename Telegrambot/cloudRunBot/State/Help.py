@@ -5,7 +5,7 @@ class Help(State):
     def stateInit(self):
         self.model.clear_data()
 
-        self.send_message("When you send /start the process will be begin")
+        self.send_message("When you send /start the process will begin")
         self.send_message("you can always send /start to reset the process to the beginning")
         self.send_message("First, you send the background of your post (square crop of AOE screenshot)")
         self.send_message("Next, you will send the unedited photos of your shirt. Send as many pictures of your shirt as you want")
