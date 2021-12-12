@@ -23,6 +23,7 @@ def parameterized_pipeline(img,
     return img
 
 def merge_layers_pipeline(bckgrnd:Image, frgrnd:Image) -> Image:
+    bckgrnd = resize_image(bckgrnd, 1080) # hacky
     return add_image_centered(bckgrnd, frgrnd)
 
 def full_shirt_pipeline(bckgrnd: Image, frgrnd: bytes, resize_to: int) -> Image:
