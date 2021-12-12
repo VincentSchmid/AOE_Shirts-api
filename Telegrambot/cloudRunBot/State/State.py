@@ -16,7 +16,7 @@ class State():
         self.model.events.started()
 
     def done_handler(self):
-        pass
+        self.send_message("Not expecting done command in this step, or maybe something went wrong?? Anyway send /start to restart the process")
 
     def send_message(self, text):
         self.model.message = text
