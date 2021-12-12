@@ -47,7 +47,7 @@ class Instance():
     
     def on_return_results(self):
         for shirt in self.model.shirts:
-            self.process_shirt(self.model.background.effective_attachment.get_file(), shirt.effective_attachment.get_file())
+            self.process_shirt(self.model.background.effective_attachment[-1].get_file(), shirt.effective_attachment[-1].get_file())
 
         self.model.events.started()
 
