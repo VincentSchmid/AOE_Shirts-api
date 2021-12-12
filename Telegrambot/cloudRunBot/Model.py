@@ -5,7 +5,7 @@ from telegram.update import Update
 
 
 class AppModel(object):
-    def __init__(self, bot: Bot):
+    def __init__(self, bot: Bot, processing_url):
         self.bot: Bot = bot
         self.events: Events = Events()
         self.shirts = []
@@ -14,6 +14,7 @@ class AppModel(object):
         self.message: str = ""
         self._update: Update = None
         self.chat_id = None
+        self.url = processing_url
     
     def clear_data(self):
         self.shirts = []

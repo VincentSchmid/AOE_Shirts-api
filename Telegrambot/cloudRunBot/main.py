@@ -14,7 +14,7 @@ from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler
 app = Flask(__name__)
 
 bot = Bot(token=os.environ["TOKEN"])
-model = AppModel(bot)
+model = AppModel(bot, os.environ["SHIRT_POROCESSING_ADDRESS"])
 instance = Instance(model)
 
 

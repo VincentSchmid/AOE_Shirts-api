@@ -62,5 +62,5 @@ class Instance():
         background_data = background.download_as_bytearray()
         foreground_data = foreground.download_as_bytearray()
 
-        self.model.result = full_pipeline(background_filename, background_data, foreground_filename, foreground_data)
+        self.model.result = full_pipeline(self.model.url, background_filename, background_data, foreground_filename, foreground_data)
         self._messager.send_file()
