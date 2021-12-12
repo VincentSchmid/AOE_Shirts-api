@@ -1,7 +1,7 @@
 import os
 import http
 
-from fastapi import Request, FastAPI
+from flask import Flask, request
 from werkzeug.wrappers import Response
 
 from Model import AppModel
@@ -11,7 +11,7 @@ from telegram import Bot, Update
 from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler
 
 
-app = FastAPI()
+app = Flask(__name__)
 
 bot = Bot(token=os.environ["TOKEN"])
 model = AppModel(bot)
@@ -27,8 +27,8 @@ dispatcher.add_handler(MessageHandler(Filters.video | Filters.photo | Filters.do
                         instance.on_document_received))
 
 @app.post("/")
-def index(request: Request) -> Response:
+def index() -> Response:
     dispatcher.process_update(
-        Update.de_json(request.json(), bot))
+        Update.de_json(request.get_json(force=True), bot))
 
     return "", http.HTTPStatus.NO_CONTENT
