@@ -22,6 +22,7 @@ dispatcher = Dispatcher(bot=bot, update_queue=None)
 
 dispatcher.add_handler(CommandHandler("start", instance.on_start_command))
 dispatcher.add_handler(CommandHandler("done", instance.on_done_command))
+dispatcher.add_handler(CommandHandler("help", instance.on_help_command))
 
 dispatcher.add_handler(MessageHandler(Filters.photo | Filters.document, 
                         instance.on_document_received))

@@ -8,5 +8,6 @@ class SettingBackground(State):
 
     def stateInit(self):
         self.model.clear_data()
-        self.send_message("Send Background Image")
+        self.send_message("Welcome to the AOE Shirtbot!")
+        self.send_message("Send the background Image of your post")
         

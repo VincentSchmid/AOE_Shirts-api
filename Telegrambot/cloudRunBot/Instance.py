@@ -8,6 +8,7 @@ from State.Idle import Idle
 from State.RecievingShirts import RecievingShirts
 from State.ReturningResult import ReturningResult
 from State.SettingBackground import SettingBackground
+from State.Help import Help
 from Messager import Messager
 from Shirt_Processing import full_pipeline
 from pathlib import Path
@@ -27,6 +28,10 @@ class Instance():
     def on_start_command(self, update: Update, context: CallbackContext):
         self.model.update = update
         self._state.start_handler()
+
+    def on_help_command(self, update: Update, context: CallbackContext):
+        self.model.update = update
+        self._state = Help(self.model)
 
     def on_done_command(self, update: Update, context: CallbackContext):
         self.model.update = update
@@ -48,8 +53,7 @@ class Instance():
     def on_return_results(self):
         for shirt in self.model.shirts:
             self.process_shirt(self.model.background.effective_attachment[-1].get_file(), shirt.effective_attachment[-1].get_file())
-
-        self.model.events.started()
+        self._state.done_handler()
 
     def process_shirt(self, background: File, foreground: File):
         background_filename = Path(background.file_path).name
