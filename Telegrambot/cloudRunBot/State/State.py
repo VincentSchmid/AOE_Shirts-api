@@ -7,7 +7,7 @@ class State():
         self.stateInit()
 
     def document_received(self, document):
-        self.send_message("Not Expecting files in this step, or maybe something went wrong?? Anyway send /start to restart the process")
+        self.send_message("Not expecting files in this step, or maybe something went wrong?? Anyway send /start to restart the process")
 
     def stateInit(self):
         pass
