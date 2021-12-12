@@ -12,10 +12,10 @@ class Messager():
         self.model.events.send_message += self.send_telegram_message
 
     def send_telegram_message(self):
-        self.bot.send_message(chat_id = self.model.update.message.chat_id,
+        self.bot.send_message(chat_id = self.model.chat_id,
                               text = self.model.message)
 
     def send_file(self):
-        self.bot.send_document(chat_id = self.model.update.message.chat_id,
+        self.bot.send_document(chat_id = self.model.chat_id,
                           document = self.model.result)
                           

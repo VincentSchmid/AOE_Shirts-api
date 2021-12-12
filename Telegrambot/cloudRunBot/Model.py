@@ -12,7 +12,8 @@ class AppModel(object):
         self.background: Message = None
         self.result: bytes = None
         self.message: str = ""
-        self.update: Update = None
+        self._update: Update = None
+        self.chat_id = None
     
     def clear_data(self):
         self.shirts = []
@@ -20,4 +21,12 @@ class AppModel(object):
         self.result = None
         self.message = ""
         self.update = None
-        
+
+    @property
+    def update(self) -> Update:
+        return self._update
+    
+    @update.setter
+    def update(self, update: Update):
+        self._update = update
+        self.chat_id = update.message.chat_id
