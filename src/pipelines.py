@@ -27,5 +27,5 @@ def merge_layers_pipeline(bckgrnd:Image, frgrnd:Image) -> Image:
 
 def full_shirt_pipeline(bckgrnd: Image, frgrnd: bytes, resize_percentage: int) -> Image:
     bckgrnd = resize_image(bckgrnd, 1080) # hacky
-    img = parameterized_pipeline(frgrnd, True, True, True, min(bckgrnd.size) * resize_percentage)
+    img = parameterized_pipeline(frgrnd, True, True, True, min(bckgrnd.size) * resize_percentage/100)
     return merge_layers_pipeline(bckgrnd, img)
