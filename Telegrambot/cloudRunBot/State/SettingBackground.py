@@ -1,9 +1,11 @@
 from .State import State
+import uuid
 
 
 class SettingBackground(State):
     def document_received(self, document):
         self.model.background = document
+        self.model.id = uuid.uuid4()
         self.model.events.background_set()
 
     def stateInit(self):

@@ -15,6 +15,7 @@ class AppModel(object):
         self._update: Update = None
         self.chat_id = None
         self.url = processing_url
+        self.id = None
     
     def clear_data(self):
         self.shirts = []
