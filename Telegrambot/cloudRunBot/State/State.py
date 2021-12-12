@@ -13,7 +13,7 @@ class State():
         pass
 
     def start_handler(self):
-        pass
+        self.model.events.started()
 
     def done_handler(self):
         pass
