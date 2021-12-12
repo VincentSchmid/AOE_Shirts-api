@@ -1,5 +1,4 @@
 import os
-from typing import BinaryIO
 import requests
 from pathlib import Path
 

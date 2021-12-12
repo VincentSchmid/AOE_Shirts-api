@@ -3,7 +3,8 @@ from .State import State
 
 class RecievingShirts(State):
     def document_received(self, document):
-        self.shirts.append(document)
+        self.model.shirts.append(document)
+        self.send_message("Shirt received")
 
     def stateInit(self):
         self.send_message("Send Unedited Shirt Photos, after all the shirts were added send /done")
