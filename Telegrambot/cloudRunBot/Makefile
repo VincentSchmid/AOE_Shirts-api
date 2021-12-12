@@ -7,7 +7,7 @@ include params.mk
 	# CONTAINER_NAME
 	# PORT
 
-.DEFAULT_GOAL := help
+.DEFAULT_GOAL := deploy-gcloud
 
 deploy-gcloud: ## Deploys code to gcloud and links telegram bot to deployed instance
 	gcloud beta run deploy bot --source . --set-env-vars TOKEN=$(TELEGRAM_TOKEN),SHIRT_POROCESSING_ADDRESS=${SHIRT_POROCESSING_ADDRESS} --platform managed --allow-unauthenticated --project $(GCLOUD_PROJECT_ID)
