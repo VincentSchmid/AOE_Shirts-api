@@ -20,7 +20,7 @@ class AppModel(object):
         self.background = None
         self.result = None
         self.message = ""
-        self.update = None
+        self._update = None
 
     @property
     def update(self) -> Update:
