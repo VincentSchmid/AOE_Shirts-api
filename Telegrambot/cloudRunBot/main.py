@@ -4,7 +4,6 @@ import http
 from flask import Flask, request
 from werkzeug.wrappers import Response
 
-from Model import AppModel
 from Instance import Instance
 
 from telegram import Bot, Update
@@ -14,8 +13,7 @@ from telegram.ext import Dispatcher, CommandHandler, Filters, MessageHandler
 app = Flask(__name__)
 
 bot = Bot(token=os.environ["TOKEN"])
-model = AppModel(bot, os.environ["SHIRT_POROCESSING_ADDRESS"])
-instance = Instance(model)
+instance = Instance(bot, os.environ["SHIRT_POROCESSING_ADDRESS"])
 
 
 dispatcher = Dispatcher(bot=bot, update_queue=None)

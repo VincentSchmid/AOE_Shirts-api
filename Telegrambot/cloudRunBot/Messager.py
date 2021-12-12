@@ -18,4 +18,7 @@ class Messager():
     def send_file(self):
         self.bot.send_document(chat_id = self.model.chat_id,
                           document = self.model.result)
-                          
+
+    def delete_message(self):
+        pass
+    

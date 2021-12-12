@@ -1,5 +1,6 @@
 from .State import State
 import uuid
+from Model import AppModel
 
 
 class SettingBackground(State):
@@ -9,7 +10,7 @@ class SettingBackground(State):
         self.model.events.background_set()
 
     def stateInit(self):
-        self.model.clear_data()
+        AppModel.Get(self.chat_id).clear_data()
         self.send_message("Welcome to the AOE Shirtbot! send /help for help")
         self.send_message("Send the background Image of your post")
         

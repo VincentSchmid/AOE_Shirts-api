@@ -5,6 +5,17 @@ from telegram.update import Update
 
 
 class AppModel(object):
+    models = {}
+
+    def Init(chat_id: str, bot: Bot, url: str):
+        if chat_id not in AppModel.models:
+            AppModel.models[chat_id] = AppModel(bot, url)
+        
+        return AppModel.models[chat_id]
+
+    def Get(chat_id):
+        return AppModel.models[chat_id]
+        
     def __init__(self, bot: Bot, processing_url):
         self.bot: Bot = bot
         self.events: Events = Events()
