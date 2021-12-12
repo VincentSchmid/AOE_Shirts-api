@@ -5,6 +5,7 @@ include params.mk
 	# TELEGRAM_TOKEN
 	# GCLOUD_PROJECT_ID
 	# CONTAINER_NAME
+	# PORT
 
 .DEFAULT_GOAL := help
 
@@ -17,7 +18,7 @@ run-container: ## Builds the container and runs it locally
 	docker build -t schmivin/$(CONTAINER_NAME) .
 	-docker stop $(CONTAINER_NAME)
 	-docker rm $(CONTAINER_NAME)
-	docker run --env PORT=5000 --env SHIRT_POROCESSING_ADDRESS=$(SHIRT_POROCESSING_ADDRESS) --env TOKEN=$(TELEGRAM_TOKEN) --name $(CONTAINER_NAME) -d schmivin/$(CONTAINER_NAME)
+	docker run --env PORT=$(PORT) --env SHIRT_POROCESSING_ADDRESS=$(SHIRT_POROCESSING_ADDRESS) --env TOKEN=$(TELEGRAM_TOKEN) --name $(CONTAINER_NAME) -d schmivin/$(CONTAINER_NAME)
 	# docker exec -t -i $(CONTAINER_NAME) /bin/bash
 
 run-locally: ## Runs app localy without container
