@@ -39,7 +39,11 @@ class Instance():
 
     def on_document_received(self, update: Update, context: CallbackContext):
         self.model.update = update
-        self._state.document_received(update.message)
+        self._state.document_received(update.message.effective_attachment)
+
+    def on_photo_received(self, update: Update, context: CallbackContext):
+        self.model.update = update
+        self._state.document_received(update.message.effective_attachment[-1])
 
     def on_started(self):
         self._state = SettingBackground(self.model)
@@ -52,7 +56,7 @@ class Instance():
     
     def on_return_results(self):
         for shirt in self.model.shirts:
-            self.process_shirt(self.model.background.effective_attachment[-1].get_file(), shirt.effective_attachment[-1].get_file())
+            self.process_shirt(self.model.background.get_file(), shirt.get_file())
         self._state.done_handler()
 
     def process_shirt(self, background: File, foreground: File):

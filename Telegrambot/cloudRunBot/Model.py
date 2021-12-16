@@ -9,7 +9,7 @@ class AppModel(object):
         self.bot: Bot = bot
         self.events: Events = Events()
         self.shirts = []
-        self.background: Message = None
+        self.background = None
         self.result: bytes = None
         self.message: str = ""
         self._update: Update = None
