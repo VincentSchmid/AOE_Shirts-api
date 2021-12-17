@@ -7,6 +7,5 @@ class ReturningResult(State):
         self.model.events.return_results()
     
     def done_handler(self):
-        self.send_message("done")
-        self.send_message("Send /start if you want to process more shirts")
+        self.send_message(self.options["APP"]["RETURN_RESULT"]["INIT"])
         

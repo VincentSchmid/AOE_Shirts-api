@@ -1,5 +1,6 @@
 from events.events import Events
 from telegram.bot import Bot
+from telegram import ParseMode
 from Model import AppModel
 
 
@@ -13,7 +14,8 @@ class Messager():
 
     def send_telegram_message(self):
         self.bot.send_message(chat_id = self.model.chat_id,
-                              text = self.model.message)
+                              text = self.model.message,
+                              parse_mode=ParseMode.MARKDOWN_V2)
 
     def send_file(self):
         self.bot.send_document(chat_id = self.model.chat_id,
