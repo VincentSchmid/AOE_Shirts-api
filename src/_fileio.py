@@ -4,6 +4,13 @@ from PIL import Image
 import io
 
 
+def open_image(path: str) -> Image:
+    return Image.open(path).convert("RGBA")
+
+def save_img(img: Image, path: str):
+    print("saving image")
+    img.save(path)
+
 def get_Image(arr) -> Image:
     return Image.open(io.BytesIO(arr)).convert("RGBA")
 
