@@ -15,10 +15,15 @@ for rembg minimum of python 3.8 is required
 
 install dependencies using the provided requirements.txt
  
+ ##### Linux:
   ```sh
   pip install -r requirements.txt -f https://download.pytorch.org/whl/cpu/torch_stable.html
   ```
-
+  
+   ##### MacOS:
+   ```sh
+  pip install -r requirements.txt
+  ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage CLI
