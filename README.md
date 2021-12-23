@@ -14,6 +14,19 @@ To get a local copy up and running follow these simple example steps.
 for rembg minimum of python 3.8 is required
 
 install dependencies using the provided requirements.txt
+The pytorch versions are dependant on which python version you choose and what operating system you are running and the requirements.txt will need to be adjusted accordingly:  
+##### mac os:
+  ```
+  torch==1.10.0+cpu
+  torchvision==0.11.1+cpu
+  ```
+##### linux:
+  ```
+  torch==1.10.0
+  torchvision==0.11.1
+  ```
+
+next install the dependecies using:  
   ```sh
   pip install -r requirements.txt
   ```
