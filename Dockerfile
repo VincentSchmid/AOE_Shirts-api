@@ -6,10 +6,14 @@ ENV PYTHONUNBUFFERED True \
 
 EXPOSE ${PORT}
 
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt -f https://download.pytorch.org/whl/cpu/torch_stable.html
+COPY [\
+    "requirements.txt", \
+    "load_rmbg_model.py", \
+    "./"]
+RUN pip install --no-cache-dir -r requirements.txt -f https://download.pytorch.org/whl/cpu/torch_stable.html && \
+    python load_rmbg_model.py
 
-COPY src src
+COPY src src/
 COPY [\
     "shirt_processing_api.py", \
     "entrypoint.sh", \

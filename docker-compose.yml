@@ -9,3 +9,4 @@ services:
     environment:
       PORT: 8000
       NUM_WORKERS: 2
+      
