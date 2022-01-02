@@ -6,3 +6,4 @@ rembg
 typer
 python-multipart
 matplotlib
+gunicorn

@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  shirtapi:
+    build: .
+    image: "shirtapi:latest"
+    container_name: shirtapi
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      NUM_WORKERS: 2
