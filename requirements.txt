@@ -2,8 +2,9 @@ torch==1.10.0+cpu
 torchvision==0.11.1+cpu
 fastapi==0.70.0
 uvicorn[standard]==0.15.0
-rembg
-typer
-python-multipart
-matplotlib
-gunicorn
+rembg==2.0.13
+typer==0.6.1
+python-multipart==0.0.5
+matplotlib==3.5.2
+gunicorn==20.1.0
+
